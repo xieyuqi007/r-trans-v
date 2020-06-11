@@ -1,0 +1,36 @@
+#!/usr/bin/env node --harmony
+'use strict'
+ // 定义脚手架的文件路径
+process.env.NODE_PATH = __dirname + '/../node_modules/'
+
+const program = require('commander')
+
+ // 定义当前版本
+program
+    .version(require('../package').version )
+
+// 定义使用方法
+program
+    .usage('<command>')
+
+program
+    .command('init')
+    .description('trans vue ing...')
+  .alias('i')
+  .action(() => {
+    require('../command/trans')()
+  })
+
+// program
+//   .command('commit')
+//   .description('commit files to the github')
+//   .alias('c')
+//   .action(() => {
+//     require('../command/commit')()
+//   })
+
+program.parse(process.argv)
+
+if(!program.args.length){
+  program.help()
+}
